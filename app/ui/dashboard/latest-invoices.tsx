@@ -2,6 +2,7 @@ import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
+import InvoiceStatus from '@/app/ui/cases/status';
 import { LatestInvoice } from '@/app/lib/definitions';
 import { fetchLatestInvoices } from '@/app/lib/data';
 
@@ -47,7 +48,7 @@ export default async function LatestInvoices() {
                 <p
                   className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
                 >
-                  {invoice.amount}
+                  <InvoiceStatus status={invoice.status} />
                 </p>
               </div>
             );
