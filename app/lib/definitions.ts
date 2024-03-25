@@ -88,4 +88,13 @@ export type InvoiceForm = {
   status: 'pending' | 'paid';
 };
 
+export type Assessor = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  status: 'active' | 'inactive';
+};
+
+
 
