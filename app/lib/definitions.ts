@@ -96,5 +96,15 @@ export type Assessor = {
   status: 'active' | 'inactive';
 };
 
+export type Case = {
+  "id": string;
+  "client_id": string;
+  "title": string;
+  "description": string;
+  "status": "Open"| "Closed";
+  "assessor_id": string;
+};
+
+
 
 

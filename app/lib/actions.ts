@@ -90,7 +90,7 @@ export type State = {
     const assessor_id = formData.get('assessor_id');
     const newCase = {id: formData.get('case id'), client_id: formData.get('client_id'), title: formData.get('title'), description: formData.get('description'),status: "Open", assessor_id: formData.get('assessor_id')};
     try {
-      const response = await fetch("https://7d7b-112-134-140-39.ngrok-free.app/case", {
+      const response = await fetch("http://localhost:8080/case", {
         method: 'POST',
         body : JSON.stringify({
             id: newCase['id'],
@@ -99,6 +99,7 @@ export type State = {
             description: newCase['description'],
             status: newCase['status'],
             assessor_id: newCase['assessor_id'],
+            
         }),
     });
     } catch (error) { 
@@ -108,8 +109,9 @@ export type State = {
     }
 
 
+
    
-    // Revalidate the cache for the invoices page and redirect the user.
+    // Revalidate the cache for the cases page and redirect the user.
     revalidatePath('/dashboard/cases');
     redirect('/dashboard/cases');
   }
@@ -179,3 +181,26 @@ export type State = {
     }
   }
   
+  export async function newAssessor(prevState: State, formData: FormData) {
+    const newassessor = {id: formData.get('id'), name: formData.get('name'), email: formData.get('email'), phone: formData.get('phone')};
+    try {
+      const response = await fetch("http://localhost:8080/assessor", {
+        method: 'POST',
+        body : JSON.stringify({
+            id: newassessor['id'],
+            name: newassessor['name'],
+            email: newassessor['email'],
+            phone: newassessor['phone'],
+            status: "Active",
+           
+        }),
+    });
+    } catch (error) { 
+      return {
+        message: 'Database Error: Failed to Add Assessor.',
+      };
+    }
+
+    revalidatePath('/dashboard/assessors');
+    redirect('/dashboard/assessors');
+  }
