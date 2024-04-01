@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/cases/buttons';
+import { UpdateInvoice, DeleteInvoice,ViewCase } from '@/app/ui/cases/buttons';
 import InvoiceStatus from '@/app/ui/cases/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
@@ -44,11 +44,13 @@ export default async function InvoicesTable({
                     <p className="text-xl font-medium">
                       {caseItem.description}
                     </p>
-                    <p>{caseItem.assessor_id}</p>
+                    <p>{caseItem.id}</p>
                   </div>
                   <div className="flex justify-end gap-2">
+                    <ViewCase id={caseItem.id} />
                     <UpdateInvoice id={caseItem.id} />
                     <DeleteInvoice id={caseItem.id} />
+                    
                   </div>
                 </div>
               </div>
@@ -109,6 +111,7 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
+                      <ViewCase id={caseItem.id} />
                       <UpdateInvoice id={caseItem.id} />
                       <DeleteInvoice id={caseItem.id} />
                     </div>

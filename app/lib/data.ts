@@ -218,3 +218,50 @@ export async function getUser(email: string) {
     throw new Error('Failed to fetch user.');
   }
 }
+
+export async function getClientLink(id: string) {
+  const error_message = { link_for_client: "Link not found. Try again later." };
+
+  try {
+    const response = await fetch(`http://localhost:8080/client_link/${id}`);
+
+    // Check if the response status code is not in the range of 200-299
+    if (!response.ok) {
+      // This will handle HTTP errors such as 4xx or 5xx responses
+      return error_message;
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // This will handle network errors and any other type of errors
+    console.error('Fetch error:', error);
+    return error_message;
+  }
+}
+
+export async function caseInfo(id :any) {
+  // It's good practice to validate input parameters
+  if (!id) {
+    throw new Error('No ID provided');
+  }
+
+  try {
+    const response = await fetch(`http://localhost:8080/case/${id}`);
+
+    // Check if the response is ok (status in the range 200-299)
+    if (!response.ok) {
+      // If the response is not ok, throw an error with the status
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Log the error to the console for debugging purposes
+    console.error('Fetch error:', error);
+
+    // Rethrow the error to be handled by the caller of the function
+    throw error;
+  }
+}

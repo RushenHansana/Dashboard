@@ -1,4 +1,4 @@
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, PlusIcon, TrashIcon ,EyeIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { deleteInvoice } from '@/app/lib/actions';
 
@@ -17,7 +17,7 @@ export function CreateInvoice() {
 export function UpdateInvoice({ id }: { id: string }) {
   return (
     <Link
-      href={'/dashboard/invoices/${id}/edit'}
+      href={`/dashboard/invoices/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />
@@ -35,5 +35,28 @@ export function DeleteInvoice({ id }: { id: string }) {
         <TrashIcon className="w-4" />
       </button>
     </form>
+  );
+}
+
+export function ViewCase({ id }: { id: string }) {
+
+  return (
+    <Link
+      href={`/dashboard/cases/${id}/view/`}
+      className="rounded-md border p-2 hover:bg-gray-100"
+    >
+      <EyeIcon className="w-5" />
+    </Link>
+  );
+}
+
+export function Done() {
+  return (
+    <Link
+      href={`/dashboard/cases/`}
+      className="inline-block text-center text-white bg-blue-600 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md shadow transition duration-300 ease-in-out transform hover:-translate-y-1"
+    >
+      Done
+    </Link>
   );
 }
