@@ -16,3 +16,11 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+/* styles/global.css */
+body {
+  background-image: url('/bgg.png'); /* Replace with the actual path to your image */
+  background-size: cover; /* Ensure the image covers the whole area */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+

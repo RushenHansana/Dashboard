@@ -82,21 +82,18 @@ export type State = {
     //     message: 'Database Error: Failed to Create Invoice.',
     //   };
     // }
-    const id = formData.get('id');
-    const client_id = formData.get('client_id');
-    const title = formData.get('title');
-    const description = formData.get('description');
-    const status = "Open";
-    const assessor_id = formData.get('assessor_id');
-    const newCase = {id: formData.get('case id'), client_id: formData.get('client_id'), title: formData.get('title'), description: formData.get('description'),status: "Open", assessor_id: formData.get('assessor_id')};
+
+    const newCase = {id: formData.get('case id'), client_id: formData.get('client_id'),client_name: formData.get('client_name') ,title: formData.get('title'), description: formData.get('description'),client_whatsappnumber: formData.get('client_phone'),status: "Open", assessor_id: formData.get('assessor_id')};
     try {
       const response = await fetch("http://localhost:8080/case", {
         method: 'POST',
         body : JSON.stringify({
             id: newCase['id'],
             client_id: newCase['client_id'],
+            client_name: newCase['client_name'],
             title: newCase['title'],
             description: newCase['description'],
+            client_whatsappnumber: newCase['client_whatsappnumber'],
             status: newCase['status'],
             assessor_id: newCase['assessor_id'],
             

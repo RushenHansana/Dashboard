@@ -4,6 +4,7 @@ import { DocumentDuplicateIcon, ArrowLeftIcon, ShareIcon } from '@heroicons/reac
 import Breadcrumbs from '@/app/ui/cases/breadcrumbs';
 import ViewSk from "@/app/ui/cases/view";
 
+
 export default async function Page({ params }:any) {
   const id = params.id;
 

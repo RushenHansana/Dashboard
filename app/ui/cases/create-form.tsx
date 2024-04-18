@@ -117,7 +117,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
         {/* cliend_id */}
         <div className="mb-4">
           <label htmlFor="client_id" className="mb-2 block text-sm font-medium">
-            Client ID
+            Client Policy Number
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
@@ -126,7 +126,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
                 name="client_id"
                 type="string"
                 step="0.01"
-                placeholder="Enter Client ID"
+                placeholder="Enter Client Policy Number"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="amount-error"
               />
@@ -142,6 +142,64 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
             </div>
           </div>
         </div>
+
+        {/* cliend_name */}
+        <div className="mb-4">
+          <label htmlFor="client_id" className="mb-2 block text-sm font-medium">
+            Client Name
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="client_name"
+                name="client_name"
+                type="string"
+                step="0.01"
+                placeholder="Enter Client Name"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                aria-describedby="amount-error"
+              />
+              {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
+            </div>
+            <div id="amount-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.amount &&
+                state.errors.amount.map((error: string) => (
+                  <p className="mt-2 text-sm text-red-500" key={error}>
+                    {error}
+                  </p>
+                ))}
+            </div>
+          </div>
+        </div>
+
+        {/* client_phone */}
+        <div className="mb-4">
+          <label htmlFor="client_phone" className="mb-2 block text-sm font-medium">
+            Client phone
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="client_phone"
+                name="client_phone"
+                type="string"
+                step="0.01"
+                placeholder="Enter Client WhatsApp Number"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                aria-describedby="amount-error"
+              />
+              {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
+            </div>
+            <div id="amount-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.amount &&
+                state.errors.amount.map((error: string) => (
+                  <p className="mt-2 text-sm text-red-500" key={error}>
+                    {error}
+                  </p>
+                ))}
+            </div>
+          </div>
+        </div>        
 
         {/* title */}
         <div className="mb-4">
@@ -174,17 +232,17 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
 
         {/* status */}
         <div className="mb-4">
-          <label htmlFor="status" className="mb-2 block text-sm font-medium">
-            Status
+          <label htmlFor="description" className="mb-2 block text-sm font-medium">
+            Description
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
               <input
-                id="status"
-                name="status"
+                id="description"
+                name="description"
                 type="string"
                 step="0.01"
-                placeholder="Enter Title"
+                placeholder="Enter Description"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="amount-error"
               />

@@ -111,6 +111,27 @@ export async function fetchFilteredInvoices(
   }
 }
 
+export async function fetchFilteredAssessors(
+
+  query: string,
+  currentPage: number,
+) {
+  noStore();
+  
+
+  try {
+    const response = await fetch("http://localhost:8080/assessor/fetch?query="+query+"&page="+currentPage);
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error('Database Error:', error);
+    // throw new Error('Failed to fetch invoices.');
+    //return empty array
+    return [];
+  }
+}
+
 export async function fetchInvoicesPages(query: string) {
   noStore();
   try {
@@ -118,6 +139,26 @@ export async function fetchInvoicesPages(query: string) {
     let totalPages: number;
     try {
       const response = await fetch("http://localhost:8080/case/pages/"+query);
+      const data = await response.json();
+      totalPages = data['total_pages'];
+      return totalPages;
+    } catch (error) {
+      console.error('Fetch Error:', error);
+      throw new Error('Failed to fetch total pages.');
+    }
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of invoices.');
+  }
+}
+
+export async function fetchAssessorsPages(query: string) {
+  noStore();
+  try {
+
+    let totalPages: number;
+    try {
+      const response = await fetch("http://localhost:8080/assessor/pages/"+query);
       const data = await response.json();
       totalPages = data['total_pages'];
       return totalPages;

@@ -1,7 +1,5 @@
-import Image from 'next/image';
 import { UpdateInvoice, DeleteInvoice,ViewCase } from '@/app/ui/cases/buttons';
 import InvoiceStatus from '@/app/ui/cases/status';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 
 export default async function InvoicesTable({
@@ -103,6 +101,7 @@ export default async function InvoicesTable({
                   <td className="whitespace-nowrap px-3 py-3">
                     {caseItem.description}
                   </td>
+                  
                   <td className="whitespace-nowrap px-3 py-3">
                     {caseItem.assessor_id}
                   </td>

@@ -62,7 +62,7 @@ const { assessorLink, clientLink, caseData } = await fetchData(id);
                     <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow transition duration-300 ease-in-out hover:shadow-lg">
                     <a href={clientLink} className="text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out">{clientLink}</a>
                     <a
-                        href={`https://api.whatsapp.com/send?text=${encodeURIComponent(clientLink)}`}
+                        href={`https://wa.me/94769497680?text=${encodeURIComponent('Your message here')}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition duration-300 ease-in-out"
