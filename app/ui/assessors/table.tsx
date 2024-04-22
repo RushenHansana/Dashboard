@@ -80,9 +80,9 @@ export default async function AssessorsTable({
                 <th scope="col" className="px-3 py-5 font-medium">
                   Contact Number
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                {/* <th scope="col" className="px-3 py-5 font-medium">
                   Registered Date
-                </th>
+                </th> */}
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
                 </th>
@@ -117,7 +117,7 @@ export default async function AssessorsTable({
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {/* <InvoiceStatus status={caseItem.status} /> */}
-                    <Date dateString={aseItem.created_at} />
+                    {/* <Date dateString={aseItem.created_at} /> */}
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">

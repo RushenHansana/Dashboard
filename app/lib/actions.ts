@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect} from 'next/navigation';
 import { signIn } from '@/auth'; 
 import { AuthError } from 'next-auth';
+import { access } from 'fs';
 
 const FormSchema = z.object({
     id: z.string(),
@@ -83,12 +84,11 @@ export type State = {
     //   };
     // }
 
-    const newCase = {id: formData.get('case id'), client_id: formData.get('client_id'),client_name: formData.get('client_name') ,title: formData.get('title'), description: formData.get('description'),client_whatsappnumber: formData.get('client_phone'),status: "Open", assessor_id: formData.get('assessor_id')};
+    const newCase = {client_id: formData.get('client_id'),client_name: formData.get('client_name') ,title: formData.get('title'), description: formData.get('description'),client_whatsappnumber: formData.get('client_phone'),status: "Open", assessor_id: formData.get('assessor_id')};
     try {
       const response = await fetch("http://localhost:8080/case", {
         method: 'POST',
         body : JSON.stringify({
-            id: newCase['id'],
             client_id: newCase['client_id'],
             client_name: newCase['client_name'],
             title: newCase['title'],
@@ -177,6 +177,55 @@ export type State = {
       throw error;
     }
   }
+  export async function whatsappsettings(whatsappsettings: { 
+    access_token: string; 
+    url: string; 
+    template_name: string; 
+  }) {
+  try {
+    const response = await fetch("http://localhost:8080/settings/update/1", {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }, // Important header
+      body: JSON.stringify(whatsappsettings), // Send the object directly
+    });
+
+    // Simple success check (adjust based on your API's response)
+    if (!response.ok) {
+      throw new Error('Failed to update settings.'); 
+    }
+
+    return { message: 'success' };
+
+  } catch (error) {
+    console.error("Error updating settings:", error); // Log the error
+    return { message: 'failed' }; 
+  }
+}
+export async function turnsettings(turnsettings: { 
+    turl: string; 
+    username: string; 
+    password: string; 
+  }) {
+  try {
+    const response = await fetch("http://localhost:8080/settings/update/2", {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }, // Important header
+      body: JSON.stringify(turnsettings), // Send the object directly
+    });
+
+    // Simple success check (adjust based on your API's response)
+    if (!response.ok) {
+      throw new Error('Failed to update settings.'); 
+    }
+
+    return { message: 'success' };
+
+  } catch (error) {
+    console.error("Error updating settings:", error); // Log the error
+    return { message: 'failed' }; 
+  }
+}
+
   
   export async function newAssessor(prevState: State, formData: FormData) {
     const newassessor = {id: formData.get('id'), name: formData.get('name'), email: formData.get('email'), phone: formData.get('phone')};
@@ -187,8 +236,8 @@ export type State = {
             id: newassessor['id'],
             name: newassessor['name'],
             email: newassessor['email'],
-            phone: newassessor['phone'],
-            status: "Active",
+            phone: newassessor['phone']
+            // status: "Active",
            
         }),
     });

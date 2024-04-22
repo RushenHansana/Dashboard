@@ -25,7 +25,7 @@ const { assessorLink, clientLink, caseData } = await fetchData(id);
 
             <div className="mb-6">
                 <h1 className="text-4xl font-bold text-gray-800 mb-2">{caseData.title}</h1>
-                <p className="text-lg text-gray-600">{caseData.description} Highway accident</p>
+                <p className="text-lg text-gray-600">{caseData.description}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

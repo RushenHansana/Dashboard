@@ -1,156 +1,54 @@
 'use client'
-// import { useState, useEffect } from 'react';
-
-// export default function Page() {
-//   const [service, setService] = useState('whatsapp');
-//   const [settings, setSettings] = useState({
-//     apiKey: '',
-//     phoneNumber: '',
-//     accountSid: '',
-//     authToken: '',
-//     twilioNumber: '',
-//     // Add other settings fields as needed
-//   });
-
-//   // Load settings from localStorage when the component mounts
-//   useEffect(() => {
-//     const savedSettings = localStorage.getItem(service + 'Settings');
-//     if (savedSettings) {
-//       setSettings(JSON.parse(savedSettings));
-//     }
-//   }, [service]);
-
-//   // Save settings to localStorage when they change
-//   useEffect(() => {
-//     localStorage.setItem(service + 'Settings', JSON.stringify(settings));
-//   }, [settings, service]);
-
-//   // Update settings state
-//   const handleChange = (e:any) => {
-//     setSettings({
-//       ...settings,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   // Render the settings form
-//   return (
-//     <main className="min-h-screen bg-gray-100 p-8">
-//       <div className="max-w-xl mx-auto bg-white rounded-lg shadow-md p-6">
-//         <h1 className="text-2xl font-bold text-gray-800 mb-4">API Settings</h1>
-//         <div className="mb-4">
-//           <label className="block text-gray-700 text-sm font-semibold mb-2">
-//             Select Service:
-//           </label>
-//           <select
-//             className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-//             value={service}
-//             onChange={(e) => setService(e.target.value)}
-//           >
-//             <option value="whatsapp">WhatsApp Business API</option>
-//             <option value="twilio">Twilio</option>
-//           </select>
-//         </div>
-//         {service === 'whatsapp' && (
-//           // WhatsApp Business API form fields
-//           <>
-//             <label className="block text-gray-700 text-sm font-semibold mb-2">
-//               API Key:
-//             </label>
-//             <input
-//               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//               type="text"
-//               name="apiKey"
-//               value={settings.apiKey}
-//               onChange={handleChange}
-//             />
-//             {/* Add other WhatsApp specific fields */}
-//           </>
-//         )}
-//         {service === 'twilio' && (
-//           // Twilio form fields
-//           <>
-//             <label className="block text-gray-700 text-sm font-semibold mb-2">
-//               Account SID:
-//             </label>
-//             <input
-//               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//               type="text"
-//               name="accountSid"
-//               value={settings.accountSid}
-//               onChange={handleChange}
-//             />
-//             <label className="block text-gray-700 text-sm font-semibold mb-2">
-//               Auth Token:
-//             </label>
-//             <input
-//               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//               type="text"
-//               name="authToken"
-//               value={settings.authToken}
-//               onChange={handleChange}
-//             />
-//             <label className="block text-gray-700 text-sm font-semibold mb-2">
-//               Twilio Number:
-//             </label>
-//             <input
-//               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//               type="text"
-//               name="twilioNumber"
-//               value={settings.twilioNumber}
-//               onChange={handleChange}
-//             />
-//             {/* Add other Twilio specific fields */}
-//           </>
-//         )}
-//         <button
-//           className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-//           type="button"
-//           onClick={() => setSettings(settings)}
-//         >
-//           Save
-//         </button>
-//       </div>
-//     </main>
-//   );
-// }
 import { useState, useEffect } from 'react';
+import { whatsappsettings } from '@/app/lib/actions';
+import { turnsettings } from '@/app/lib/actions';
+import { set } from 'date-fns';
 
 export default function Page() {
   const [service, setService] = useState('whatsapp');
+  const [isSaved, setIsSaved] = useState(0);
   const [settings, setSettings] = useState({
-    apiKey: '',
-    phoneNumber: '',
-    accountSid: '',
-    authToken: '',
-    twilioNumber: '',
-    whatsappApiLink: '',
+    access_token: '',
+    url: '',
+    template: '',
+    turl: '',
+    username: '',
+    password: '',
     whatsappBusinessNumber: '',
   });
+
+  const [whatsappSettings, setWhatsappSettings] = useState({
+    access_token: '',
+    url: '',
+    template_name: '',
+  });
+  const [turnSettings, setTurnSettings] = useState({
+    turl: '',
+    username: '',
+    password: '',
+  });
+
 
   // Key to save and retrieve from localStorage
   const localStorageKey = service + 'Settings';
 
-  // Load settings from localStorage when the component mounts or service changes
-  useEffect(() => {
-    const savedSettings = localStorage.getItem(localStorageKey);
-    if (savedSettings) {
-      setSettings(JSON.parse(savedSettings));
-    }
-  }, [service]);
 
-  // Save settings to localStorage when they change
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(settings));
-  }, [settings]);
-
-  // Update settings state
-  const handleChange = (e:any) => {
-    setSettings({
-      ...settings,
+  const handleWhatsappChange = (e: any) => {
+    setWhatsappSettings({
+      ...whatsappSettings,
       [e.target.name]: e.target.value,
     });
+    
   };
+  
+  const handleTurnChange = (e: any) => {
+    setTurnSettings({
+      ...turnSettings,
+      [e.target.name]: e.target.value,
+    });
+   
+  };
+  
 
   // Render the settings form
   return (
@@ -159,7 +57,7 @@ export default function Page() {
         <h1 className="text-3xl font-bold text-gray-800 mb-6">API Settings</h1>
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Select Service:
+            Select Setting:
           </label>
           <div className="relative">
             <select
@@ -168,7 +66,7 @@ export default function Page() {
               onChange={(e) => setService(e.target.value)}
             >
               <option value="whatsapp">WhatsApp Business API</option>
-              <option value="twilio">Twilio</option>
+              <option value="turn">Turn Server</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               {/* Custom dropdown arrow */}
@@ -179,85 +77,96 @@ export default function Page() {
           </div>
         </div>
         <form className="bg-gray-50 p-4 rounded-lg">
+          {isSaved==1 && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            Settings saved successfully!
+          </div>
+           )} 
+          {isSaved==2 && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            Settings not saved! Please try again.
+          </div>
+            )}
+           
           {service === 'whatsapp' && (
             // WhatsApp Business API form fields
             <>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-semibold mb-2">
-                  API Key:
+                  Access Token:
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
-                  name="apiKey"
-                  value={settings.apiKey}
-                  onChange={handleChange}
+                  name="access_token"
+                  value={whatsappSettings.access_token}
+                  onChange={handleWhatsappChange}
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-semibold mb-2">
-                  WhatsApp Business Number:
+                  WhatsApp Business API URL:
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
-                  name="whatsappBusinessNumber"
-                  value={settings.whatsappBusinessNumber}
-                  onChange={handleChange}
+                  name="url"
+                  value={whatsappSettings.url}
+                  onChange={handleWhatsappChange}
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-semibold mb-2">
-                  WhatsApp API Link:
+                  WhatsApp Message Template:
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
-                  name="whatsappApiLink"
-                  value={settings.whatsappApiLink}
-                  onChange={handleChange}
+                  name="template_name"
+                  value={whatsappSettings.template_name}
+                  onChange={handleWhatsappChange}
                 />
               </div>
               {/* Add other WhatsApp specific fields */}
             </>
           )}
-          {service === 'twilio' && (
+          {service === 'turn' && (
             // Twilio form fields
             <>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-semibold mb-2">
-                  Account SID:
+                  Turn URL:
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
                   name="accountSid"
-                  value={settings.accountSid}
-                  onChange={handleChange}
+                  value={turnSettings.turl}
+                  onChange={handleTurnChange}
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-semibold mb-2">
-                  Auth Token:
+                  Turn Username:
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
                   name="authToken"
-                  value={settings.authToken}
-                  onChange={handleChange}
+                  value={turnSettings.username}
+                  onChange={handleTurnChange}
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-semibold mb-2">
-                  Twilio Number:
+                  Turn Password:
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
                   name="twilioNumber"
-                  value={settings.twilioNumber}
-                  onChange={handleChange}
+                  value={turnSettings.password}
+                  onChange={handleTurnChange}
                 />
               </div>
               {/* Add other Twilio specific fields */}
@@ -266,7 +175,28 @@ export default function Page() {
           <button
             className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
-            onClick={() => setSettings(settings)}
+            onClick={async () => {
+              if (service === 'whatsapp') {
+                  const response = await whatsappsettings(whatsappSettings);
+                  if (response['message'] === 'success') {
+                    setIsSaved(1);
+                    setTimeout(() => setIsSaved(0), 3000); // Hide message after 3 seconds
+                  }else {
+                    setIsSaved(2);
+                    setTimeout(() => setIsSaved(0), 3000); // Hide message after 3 seconds
+                  }
+              } else if (service === 'turn') {
+                  const response = await turnsettings(turnSettings);
+                  if (response['message'] === 'success') {
+                    setIsSaved(1);
+                    setTimeout(() => setIsSaved(0), 3000); // Hide message after 3 seconds
+                  }else {
+                    setIsSaved(2);
+                    setTimeout(() => setIsSaved(0), 3000); // Hide message after 3 seconds
+                  }
+                
+              }
+          }}
           >
             Save
           </button>

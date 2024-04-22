@@ -99,9 +99,11 @@ export type Assessor = {
 export type Case = {
   "id": string;
   "client_id": string;
+  "client_name": string;
   "title": string;
   "description": string;
   "status": "Open"| "Closed";
+  "client_whatsappnumber": string;
   "assessor_id": string;
 };
 

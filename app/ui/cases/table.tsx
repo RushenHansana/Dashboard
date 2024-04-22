@@ -31,16 +31,16 @@ export default async function InvoicesTable({
                         height={28}
                         alt={`${invoice.name}'s profile picture`}
                       /> */}
-                      <p>{caseItem.client_id}</p>
+                      <p>{caseItem.client_name}</p>
                     </div>
                     <p className="text-sm text-gray-500">{caseItem.title}</p>
                   </div>
-                  <InvoiceStatus status={caseItem.status} />
+                  {/* <InvoiceStatus status={caseItem.status} /> */}
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
                     <p className="text-xl font-medium">
-                      {caseItem.description}
+                      {caseItem.title}
                     </p>
                     <p>{caseItem.id}</p>
                   </div>
@@ -61,13 +61,16 @@ export default async function InvoicesTable({
                   Client Name
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
+                  Client Policy Number
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
                   Title
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Description
+                  Client Phone
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Assessor Name
+                  Assesor ID
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
@@ -78,30 +81,25 @@ export default async function InvoicesTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {cases?.map((caseItem:any) => (
+              {cases?.map((caseItem: any) => (
                 <tr
                   key={caseItem.id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      {/* <Image
-                        src={invoice.image_url}
-                        className="rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${invoice.name}'s profile picture`}
-                      /> */}
-                      <p>{caseItem.client_id}</p>
+                      <p>{caseItem.client_name}</p>
                     </div>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {caseItem.client_id}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {caseItem.title}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {caseItem.description}
+                    {caseItem.client_whatsappnumber}
                   </td>
-                  
                   <td className="whitespace-nowrap px-3 py-3">
                     {caseItem.assessor_id}
                   </td>
@@ -111,13 +109,14 @@ export default async function InvoicesTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <ViewCase id={caseItem.id} />
-                      <UpdateInvoice id={caseItem.id} />
-                      <DeleteInvoice id={caseItem.id} />
+                      {/* <UpdateInvoice id={caseItem.id} />
+                      <DeleteInvoice id={caseItem.id} /> */}
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
+
           </table>
         </div>
       </div>

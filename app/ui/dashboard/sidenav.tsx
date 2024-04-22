@@ -1,51 +1,92 @@
+'use client';
+
 import Link from 'next/link';
 import NavLinks from '@/app/ui/dashboard/nav-links';
 import AcmeLogo from '@/app/ui/acme-logo';
 import { PowerIcon } from '@heroicons/react/24/outline';
-import { signOut } from '@/auth';
-import Image from 'next/image';
+import { signOut } from '@/auth'; // Replace with your signOut logic
+import React, { useRef, useState, useEffect } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
+import Logout from './logout';
 
-export default function SideNav() {
+interface SideNavProps {}
+
+const SideNav: React.FC<SideNavProps> = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const sideNavRef = useRef<HTMLDivElement>(null);
+
+  const toggleDrawer = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Close the drawer when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen && sideNavRef.current && !sideNavRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isOpen]);
+
   return (
-  
-      <div >
-        <Image
-              src='/bgg.png'
-              fill
-              alt='Login image'
-              className='absolute brightness-50 object-cover rounded'
-          />
+    <div>
+      <div>
+        <nav className="fixed top-0 left-0 right-0 h-16 bg-gray-800 z-50">
+          <button
+            className="sticky top-4 left-4 z-50 bg-gray-800 text-white px-4 py-2 rounded-md"
+            onClick={toggleDrawer}
+          >
+            <MenuIcon />
+          </button>
+        </nav>
+      </div>
 
-          <div className="flex flex-col justify-between h-screen px-1 md:px-1">
-            <div className="pt-4 md:pt-4">
-              {/* Top content goes here */}
-              <Link className="w-full" href="/">
-                <div className="relative w-full grow rounded-md md:block mb-16">
-                  <AcmeLogo />
-                </div>
-              </Link>
-              <div className="z-10 flex grow flex-row justify-center space-x-8 md:flex-col md:space-x-0 md:space-y-4">
-                <NavLinks />
-              </div>
-            </div>
-            <div className="relative mt-auto pb-4 md:pb-6">
-              {/* Logout button */}
-              <form
-                action={async () => {
-                  'use server';
-                  await signOut();
-                }}
-              >
-                <button className="flex h-[48px] w-full items-center justify-center gap-2 rounded-md bg-sky-500 p-3 text-sm font-medium hover:bg-sky-500 hover:text-red-600 md:flex-none md:justify-start md:p-2 md:px-3">
-                  <PowerIcon className="w-6" />
-                  <div className="hidden md:block">Log Out</div>
-                </button>
-              </form>
-            </div>
+      <div
+        ref={sideNavRef}
+        className={`side-nav fixed left-0 top-0 bottom-0 w-64 bg-gray-800 text-white rounded-md mt-15 p-4 transition-transform duration-300 z-40 ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full mt-4">
+          <div className="mb-8 ">
+            {/* Your Acme Logo here */}
+            {/* <AcmeLogo /> */}
           </div>
 
-        </div>
+          <div className="flex-grow space-y-4">
+            {/* Pass the closeDrawer function as a prop */}
+            <NavLinks closeDrawer={() => setIsOpen(false)} /> 
+    </div>
 
- 
+          <div className="mt-auto">
+            <button
+              className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-white bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              // onClick={signOut} // Replace with your signOut function
+              onClick={async (e) => {
+                e.preventDefault();
+                await Logout(); // Call the function directly (experimental)
+                // Handle redirection if needed
+              }}
+            >
+
+              <span>Sign Out</span>
+              <PowerIcon className="w-5 h-5 ml-2" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`fixed inset-0 z-30 bg-black bg-opacity-25 backdrop-blur-sm transition-opacity duration-300 ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setIsOpen(false)} // Close when clicking backdrop
+      ></div>
+    </div>
   );
-}
+};
+
+export default SideNav;
