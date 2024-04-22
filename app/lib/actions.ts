@@ -207,7 +207,7 @@ export async function turnsettings(turnsettings: {
     password: string; 
   }) {
   try {
-    const response = await fetch("http://localhost:8080/settings/update/2", {
+    const response = await fetch("http://localhost:8080/credentials_turnserver/update_credentials/1", {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' }, // Important header
       body: JSON.stringify(turnsettings), // Send the object directly
