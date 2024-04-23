@@ -101,7 +101,7 @@ export async function fetchFilteredInvoices(
   
 
   try {
-    const response = await fetch("http://localhost:8080/case/fetch?query="+query+"&page="+currentPage);
+    const response = await fetch("http://13.201.160.40/case/fetch?query="+query+"&page="+currentPage);
     const data = await response.json();
     return data;
 
@@ -120,7 +120,7 @@ export async function fetchFilteredAssessors(
   
 
   try {
-    const response = await fetch("http://localhost:8080/assessor/fetch?query="+query+"&page="+currentPage);
+    const response = await fetch("http://13.201.160.40/assessor/fetch?query="+query+"&page="+currentPage);
     const data = await response.json();
     return data;
 
@@ -138,7 +138,7 @@ export async function fetchInvoicesPages(query: string) {
 
     let totalPages: number;
     try {
-      const response = await fetch("http://localhost:8080/case/pages/"+query);
+      const response = await fetch("http://13.201.160.40/case/pages/"+query);
       const data = await response.json();
       totalPages = data['total_pages'];
       return totalPages;
@@ -158,7 +158,7 @@ export async function fetchAssessorsPages(query: string) {
 
     let totalPages: number;
     try {
-      const response = await fetch("http://localhost:8080/assessor/pages/"+query);
+      const response = await fetch("http://13.201.160.40/assessor/pages/"+query);
       const data = await response.json();
       totalPages = data['total_pages'];
       return totalPages;
@@ -264,7 +264,7 @@ export async function getClientLink(id: string) {
   const error_message = { link_for_client: "Link not found. Try again later." };
 
   try {
-    const response = await fetch(`http://localhost:8080/client_link/${id}`);
+    const response = await fetch(`http://13.201.160.40/client_link/${id}`);
 
     // Check if the response status code is not in the range of 200-299
     if (!response.ok) {
@@ -288,7 +288,7 @@ export async function caseInfo(id :any) {
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/case/${id}`);
+    const response = await fetch(`http://13.201.160.40/case/${id}`);
 
     // Check if the response is ok (status in the range 200-299)
     if (!response.ok) {
@@ -309,7 +309,7 @@ export async function caseInfo(id :any) {
 
 export async function getNumbers() {
   try {
-    const response = await fetch('http://localhost:8080/assessor/phone');
+    const response = await fetch('http://13.201.160.40/assessor/phone');
     const data = await response.json();
     return data;
   } catch (error) {

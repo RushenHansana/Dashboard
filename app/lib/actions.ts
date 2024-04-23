@@ -25,20 +25,20 @@ const FormSchema = z.object({
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ id:true,date: true });
 
-const postRequest = async (details: any) => {
-    const response = await fetch("https://7d7b-112-134-140-39.ngrok-free.app/case", {
-        method: 'POST',
-        body : JSON.stringify({
-            id: '45',
-            client_id: details['client_id'],
-            title: details['title'],
-            description: details['description'],
-            status: 'Open',
-            assessor_id: details['assessor_id'],
-        }),
-    });
-    return response.json();
-};
+// const postRequest = async (details: any) => {
+//     const response = await fetch("https://7d7b-112-134-140-39.ngrok-free.app/case", {
+//         method: 'POST',
+//         body : JSON.stringify({
+//             id: '45',
+//             client_id: details['client_id'],
+//             title: details['title'],
+//             description: details['description'],
+//             status: 'Open',
+//             assessor_id: details['assessor_id'],
+//         }),
+//     });
+//     return response.json();
+// };
 
 // This is temporary until @types/react-dom is updated
 export type State = {
@@ -86,7 +86,7 @@ export type State = {
 
     const newCase = {client_id: formData.get('client_id'),client_name: formData.get('client_name') ,title: formData.get('title'), description: formData.get('description'),client_whatsappnumber: formData.get('client_phone'),status: "Open", assessor_id: formData.get('assessor_id')};
     try {
-      const response = await fetch("http://localhost:8080/case", {
+      const response = await fetch("http://13.201.160.40/case", {
         method: 'POST',
         body : JSON.stringify({
             client_id: newCase['client_id'],
@@ -183,7 +183,7 @@ export type State = {
     template_name: string; 
   }) {
   try {
-    const response = await fetch("http://localhost:8080/settings/update/1", {
+    const response = await fetch("http://13.201.160.40/settings/update/1", {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' }, // Important header
       body: JSON.stringify(whatsappsettings), // Send the object directly
@@ -207,7 +207,7 @@ export async function turnsettings(turnsettings: {
     password: string; 
   }) {
   try {
-    const response = await fetch("http://localhost:8080/credentials_turnserver/update_credentials/1", {
+    const response = await fetch("http://13.201.160.40/credentials_turnserver/update_credentials/1", {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' }, // Important header
       body: JSON.stringify(turnsettings), // Send the object directly
@@ -230,7 +230,7 @@ export async function turnsettings(turnsettings: {
   export async function newAssessor(prevState: State, formData: FormData) {
     const newassessor = {id: formData.get('id'), name: formData.get('name'), email: formData.get('email'), phone: formData.get('phone')};
     try {
-      const response = await fetch("http://localhost:8080/assessor", {
+      const response = await fetch("http://13.201.160.40/assessor", {
         method: 'POST',
         body : JSON.stringify({
             id: newassessor['id'],
