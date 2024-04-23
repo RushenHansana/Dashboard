@@ -84,7 +84,7 @@ export type State = {
     //   };
     // }
 
-    const newCase = {client_id: formData.get('client_id'),client_name: formData.get('client_name') ,title: formData.get('title'), description: formData.get('description'),client_whatsappnumber: formData.get('client_phone'),status: "Open", assessor_id: formData.get('assessor_id')};
+    const newCase = {client_id: formData.get('client_id'),client_name: formData.get('client_name') ,title: formData.get('title'), description: formData.get('description'),client_whatsappnumber: formData.get('client_phone'),status: "Open", assessor_id: formData.get('number')};
     try {
       const response = await fetch("http://13.201.160.40/case", {
         method: 'POST',
