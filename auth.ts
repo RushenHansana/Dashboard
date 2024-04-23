@@ -5,7 +5,14 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
- 
+
+// Hardcoded user credentials
+const hardcodedUsers = [
+  { email: 'user@example.com', password: '123456' },
+  { email: 'user2@example.com', password: '123456' },
+  // Add more users as needed
+];
+
 async function getUser(email: string): Promise<User | undefined> {
   try {
     const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
@@ -15,7 +22,7 @@ async function getUser(email: string): Promise<User | undefined> {
     throw new Error('Failed to fetch user.');
   }
 }
- 
+
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
@@ -24,15 +31,19 @@ export const { auth, signIn, signOut } = NextAuth({
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);
- 
+        
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
-          const user = await getUser(email);
-          if (!user) return null;
-          const passwordsMatch = await bcrypt.compare(password, user.password);
-            if (passwordsMatch) return user;
+          // Check if the user's credentials match any hardcoded user
+          const hardcodedUser = hardcodedUsers.find(
+            user => user.email === email && user.password === password
+          );
+          if (hardcodedUser) {
+            // Return the user object if credentials match
+            return { email: hardcodedUser.email };
+          }
         }
-        console.log('Invalid credentials'); 
+        console.log('Invalid credentials');
         return null;
       },
     }),
