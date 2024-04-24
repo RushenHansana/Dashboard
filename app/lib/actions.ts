@@ -8,6 +8,8 @@ import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { access } from 'fs';
 
+const link = "https://nwebrtc.sytes.net";
+
 const FormSchema = z.object({
     id: z.string(),
     customerId: z.string({
@@ -86,7 +88,7 @@ export type State = {
 
     const newCase = {client_id: formData.get('client_id'),client_name: formData.get('client_name') ,title: formData.get('title'), description: formData.get('description'),client_whatsappnumber: formData.get('client_phone'),status: "Open", assessor_id: formData.get('number')};
     try {
-      const response = await fetch("http://13.201.160.40/case", {
+      const response = await fetch(link+"/case", {
         method: 'POST',
         body : JSON.stringify({
             client_id: newCase['client_id'],
@@ -183,7 +185,7 @@ export type State = {
     template_name: string; 
   }) {
   try {
-    const response = await fetch("http://13.201.160.40/settings/update/1", {
+    const response = await fetch(link+"/settings/update/1", {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' }, // Important header
       body: JSON.stringify(whatsappsettings), // Send the object directly
@@ -207,7 +209,7 @@ export async function turnsettings(turnsettings: {
     password: string; 
   }) {
   try {
-    const response = await fetch("http://13.201.160.40/credentials_turnserver/update_credentials/1", {
+    const response = await fetch(link+"/credentials_turnserver/update_credentials/1", {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' }, // Important header
       body: JSON.stringify(turnsettings), // Send the object directly
@@ -230,7 +232,7 @@ export async function turnsettings(turnsettings: {
   export async function newAssessor(prevState: State, formData: FormData) {
     const newassessor = {id: formData.get('id'), name: formData.get('name'), email: formData.get('email'), phone: formData.get('phone')};
     try {
-      const response = await fetch("http://13.201.160.40/assessor", {
+      const response = await fetch(link+"/assessor", {
         method: 'POST',
         body : JSON.stringify({
             id: newassessor['id'],
