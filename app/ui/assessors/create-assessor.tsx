@@ -83,7 +83,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
            <input
              id="phone"
              name="phone"
-             type="tel"
+             type="string"
              step="0.01"
              placeholder="Enter the assessor's contact number"
              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"

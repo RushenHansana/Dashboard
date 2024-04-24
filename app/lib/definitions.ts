@@ -81,6 +81,8 @@ export type CustomerField = {
   name: string;
 };
 
+
+
 export type InvoiceForm = {
   id: string;
   customer_id: string;
@@ -102,11 +104,19 @@ export type Case = {
   "client_name": string;
   "title": string;
   "description": string;
-  "status": "Open"| "Closed";
   "client_whatsappnumber": string;
   "assessor_id": string;
 };
 
+export type CaseForm = {
+  id: string;
+  client_id: string;
+  client_name: string;
+  title: string;
+  description: string;
+  client_whatsappnumber: string;
+  assessor_id: string
+};
 
 
 

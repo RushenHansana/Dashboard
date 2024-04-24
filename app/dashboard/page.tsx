@@ -2,7 +2,6 @@ import CardWrapper from '../ui/dashboard/cards';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
-import { fetchCardData } from '@/app/lib/data';
 import { Suspense } from 'react';
 import { RevenueChartSkeleton, LatestInvoicesSkeleton, CardSkeleton } from '../ui/skeletons';
 import { Metadata } from 'next';
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const { numberOfInvoices, numberOfCustomers, totalPaidInvoices, totalPendingInvoices } = await fetchCardData();
+  const { numberOfInvoices, numberOfCustomers, totalPaidInvoices, totalPendingInvoices }:any = { numberOfInvoices: 0, numberOfCustomers: 0, totalPaidInvoices: 0, totalPendingInvoices: 0 };
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

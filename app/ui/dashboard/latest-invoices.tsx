@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import InvoiceStatus from '@/app/ui/cases/status';
 import { LatestInvoice } from '@/app/lib/definitions';
-import { fetchLatestInvoices } from '@/app/lib/data';
+
 import { fetchFilteredInvoices } from '@/app/lib/data';
 
 export default async function LatestInvoices() {
