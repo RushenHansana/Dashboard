@@ -51,7 +51,7 @@ export default async function InvoicesTable({ query, currentPage }:any) {
                   Contact Number
                 </th>
                 <th scope="col" className="px-3 py-3">
-                  Assessor ID
+                  Assessor Number
                 </th>
                 <th scope="col" className="px-3 py-3">
                   Status

@@ -34,12 +34,19 @@ const SideNav: React.FC<SideNavProps> = () => {
     <div>
 <div>
   <nav className="fixed top-0 left-0 right-0 h-16 bg-gray-800 z-50 flex items-center px-4">
+    
+    
     <button
-      className="text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-md p-2"
+      className="text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-md p-2 relative"
       onClick={toggleDrawer}
     >
       <MenuIcon />
+      <span className="ml-2 absolute top-0 mt-2.5 -translate-y-fulll">Menu</span>
     </button>
+    <div className="flex-1 text-center text-white">
+          <h1 className="text-lg font-semibold">Welcome to the Web-RTC Call-Center!</h1>
+    </div>
+   
     {/* Your Acme Logo here */}
     {/* <AcmeLogo /> */}
 
