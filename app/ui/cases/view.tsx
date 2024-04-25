@@ -4,7 +4,7 @@ import { Done } from "./buttons";
 import { ClipboardIcon, ArrowLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
 
 export default async function ViewSk({ id }: any) {
-  const assessorLink = `https://23e2-112-134-140-39.ngrok-free.app//main/${id}`;
+  const assessorLink = `https://webrtc-client.sytes.net/main/${id}`;
   const res = await getClientLink(id);
   const clientLink = res['link_for_client'];
   const caseData = await caseInfo(id);
@@ -40,7 +40,7 @@ export default async function ViewSk({ id }: any) {
                 {assessorLink}
               </a>
               <a
-                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(assessorLink)}`}
+                href={`https://wa.me/${caseData.assessor_id}?text=${encodeURIComponent(assessorLink)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition duration-300 ease-in-out"
@@ -60,7 +60,7 @@ export default async function ViewSk({ id }: any) {
                 {clientLink}
               </a>
               <a
-                href={`https://wa.me/94769497680?text=${encodeURIComponent('Your message here')}`}
+                href={`https://wa.me/${caseData.status}?text=${encodeURIComponent(clientLink)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition duration-300 ease-in-out"
