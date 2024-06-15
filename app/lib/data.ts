@@ -11,7 +11,7 @@ import {
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
-const link = "https://nwebrtc.sytes.net";
+const link = process.env.API_LINK || "http://localhost:8080";
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.

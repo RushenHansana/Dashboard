@@ -8,7 +8,7 @@ import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { access } from 'fs';
 
-const link = "https://nwebrtc.sytes.net";
+const link = process.env.API_LINK|| 'http://localhost:8080';
 
 const FormSchema = z.object({
     id: z.string(),
