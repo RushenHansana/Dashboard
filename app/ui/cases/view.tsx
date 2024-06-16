@@ -4,7 +4,8 @@ import { Done } from "./buttons";
 import { ClipboardIcon, ArrowLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
 
 export default async function ViewSk({ id }: any) {
-  const assessorLink = process.env.ASSESSOR_LINK|| '';;
+  const assessorLinkBase = process.env.ASSESSOR_LINK|| '';
+  const assessorLink = `${assessorLinkBase}/main/${id}`;
   const res = await getClientLink(id);
   const clientLink = res['link_for_client'];
   const caseData = await caseInfo(id);

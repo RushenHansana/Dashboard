@@ -1,0 +1,11 @@
+version: '3.3'  # Use a newer version of Docker Compose
+
+services:
+  web-rtc-service:
+    image: rushenhansana/web-rtc:callcenter-1.0
+    restart: always  # Restart the container automatically if it stops
+    ports:
+      - "3000:3000"  # Map container port 3000 to host port 3000
+    environment:
+      ASSESSOR_LINK: "http://localhost:8080/api/assessor" # Correct the link for the webclient UI
+      API_LINK: "http://localhost:8080" # Correct the link for the backend API
